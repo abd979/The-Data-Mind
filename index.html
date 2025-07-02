@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Data Mind - Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>The Data Mind</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="profile.html" class="nav-link" id="profile-link" style="display: none;">Profile</a>
+                <a href="login.html" class="nav-link" id="login-link">Login</a>
+                <a href="signup.html" class="nav-link" id="signup-link">Sign Up</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Search posts...">
+            <button id="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="posts-container" id="posts-container">
+                <!-- Posts will be loaded here -->
+            </div>
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Loading posts...</p>
+            </div>
+            <div class="no-posts" id="no-posts" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>No posts found</h3>
+                <p>Try adjusting your search terms</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Post Modal -->
+    <div class="modal" id="post-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <!-- Comment Modal -->
+    <div class="modal" id="comment-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="comment-content"></div>
+        </div>
+    </div>
+    <div id="cookie-consent-banner" style="position:fixed;bottom:0;left:0;width:100%;background:#222;color:#fff;padding:1rem;text-align:center;z-index:9999;display:none;">
+        <span>We use cookies to ensure you get the best experience on our website. By continuing to use our site, you accept our use of cookies. <a href="privacy policy.html" style="color:#ffd700;text-decoration:underline;">Learn more</a>.</span>
+        <button id="accept-cookies-btn" style="margin-left:1rem;padding:0.5rem 1.5rem;background:#ffd700;color:#222;border:none;border-radius:20px;cursor:pointer;font-weight:bold;">Accept</button>
+    </div>
+    <script>
+        // Show cookie consent banner if not accepted
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!localStorage.getItem('cookiesAccepted')) {
+                document.getElementById('cookie-consent-banner').style.display = 'block';
+            }
+            document.getElementById('accept-cookies-btn').onclick = function() {
+                localStorage.setItem('cookiesAccepted', 'true');
+                document.getElementById('cookie-consent-banner').style.display = 'none';
+            };
+        });
+    </script>
+    <script src="firebase-config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html> 
